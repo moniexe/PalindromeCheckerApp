@@ -1,57 +1,20 @@
-import java.util.*;
+import java.util.Scanner;
 
-
-interface PalindromeStrategy {
-    boolean check(String input);
-}
-
-class StackStrategy implements PalindromeStrategy {
-
-    public boolean check(String input) {
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-        Stack<Character> stack = new Stack<>();
-
-        for (char c : normalized.toCharArray()) {
-            stack.push(c);
+public class PalindromeCheckerApp{
+    public static void main(String[] args){
+        System.out.print("Welcome to Palindrome Checker App Management System\n");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
+        String reversed = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
         }
-
-        for (char c : normalized.toCharArray()) {
-            if (c != stack.pop()) {
-                return false;
-            }
+        if (input.equals(reversed)) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
         }
-        return true;
-    }
-}
-
-class DequeStrategy implements PalindromeStrategy {
-
-    public boolean check(String input) {
-        String normalized = input.replaceAll("\\s+", "").toLowerCase();
-        Deque<Character> deque = new ArrayDeque<>();
-
-        for (char c : normalized.toCharArray()) {
-            deque.addLast(c);
-        }
-
-        while (deque.size() > 1) {
-            if (!deque.removeFirst().equals(deque.removeLast())) {
-                return false;
-            }
-        }
-        return true;
-    }
-}
-
-class PalindromeService {
-
-    private PalindromeStrategy strategy;
-
-    public PalindromeService(PalindromeStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public boolean checkPalindrome(String input) {
-        return strategy.check(input);
+        scanner.close();
     }
 }
