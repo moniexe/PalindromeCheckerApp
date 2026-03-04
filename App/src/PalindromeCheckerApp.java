@@ -1,30 +1,19 @@
-import java.util.*;
-//version 6.0
-//author akhilmattay
-//useCase 6:Queue + Stack Based Palindrome Check
+import java.util.Scanner;
 
-public class PalindromeCheckerApp {
-
-    public static boolean isPalindrome(String str, int start, int end) {
-        if (start >= end) {
-            return true;
-        }
-        if (str.charAt(start) != str.charAt(end)) {
-            return false;
-        }
-        return isPalindrome(str, start + 1, end - 1);
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Welcome to Palindrome Checker App Management System");
+public class PalindromeCheckerApp{
+    public static void main(String[] args){
+        System.out.print("Welcome to Palindrome Checker App Management System\n");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a string to check palindrome: ");
+        System.out.print("Enter a string: ");
         String input = scanner.nextLine();
-        boolean result = isPalindrome(input, 0, input.length() - 1);
-        if (result) {
-            System.out.println("Palindrome");
+        String reversed = "";
+        for (int i = input.length() - 1; i >= 0; i--) {
+            reversed = reversed + input.charAt(i);
+        }
+        if (input.equals(reversed)) {
+            System.out.println(input + " is a palindrome.");
         } else {
-            System.out.println("Not Palindrome");
+            System.out.println(input + " is not a palindrome.");
         }
         scanner.close();
     }
